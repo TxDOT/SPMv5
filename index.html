@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SPM5</title>
+    <!-- ArcGIS JS 4 CSS -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.8/esri/css/main.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.8/dijit/themes/claro/claro.css">
+    <!-- Bootstrap CSS CDN  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- FontAwesome CSS CDN  -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+
+    <body>
+
+        <nav class="navbar-primary" id="sideNav">
+            <div id="headerSearch">
+                <div id="header">
+                    <div class="btn-expand-collapse" id="banner">
+                        <span class="glyphicon glyphicon-menu-left" id="slidebtn"></span>
+                    </div>
+                    <div class="nav-label" id="headerTitle">Statewide Planning Map</div>
+                </div>
+                <!-- UNCOMMENT TO CONSTRUCT ESRI SEARCH WIDGET IN THE NAVBAR -->
+                <div id="searchIcon">
+                    <a href="#">
+                        <span class="esri-icon esri-icon-search"></span>
+                    </a>
+                </div>
+                <div id="search">
+                    <span class="search-label" id="searchWidgetDiv"></span>
+                </div>
+            </div>
+
+
+            <ul class="navbar-primary-menu">
+                <li title="Add Overlays to Map">
+                    <a role="menuitem" tabindex="0" href='#' data-target="#test" data-toggle="collapse" aria-expanded="false" aria-controls="test">
+                        <span class="esri-icon esri-icon-layers"></span>
+                        <span class="nav-label">Overlays</span>
+                        <span id="overlaysDown" class="glyphicon glyphicon-menu-down"></span>
+                    </a>
+                </li>
+                <div class="collapse" id="test">
+                    <div id="layerListDiv" class="nav-label">
+                        <section class="clearAllContainer">
+                            <div class="checkboxClearAll" id="clearAll">
+                                <div class="clearAllMiddle" id="clearAllClick">
+                                    <i class="far fa-times-circle"></i>
+                                </div>
+                                <span id="clearAllLabel">Clear All Overlays</span>
+                            </div>
+                        </section>
+                        <section class="evacRouteContainer">
+                            <div class="checkboxEvacRoute" id="evacRoute">
+                                <div class="evacMiddle" id="evacClick">
+                                    <i class="fa fa-toggle-on fa-2x activeEvac" id="onEvac" style="display:none;"></i>
+                                    <i class="fa fa-toggle-on fa-2x fa-rotate-180 inactiveEvac" id="offEvac" ></i>
+                                </div>
+                                <span id="evacLabel">Evacuation Route</span>
+                            </div>
+                            <div class="evacRouteLegendBtn">
+                                <button class="glyphicon glyphicon-menu-down" type="button" data-toggle="collapse" data-target="#evacRouteLegend" aria-expanded="false" aria-controls="evacRouteLegend" title="Legend" id="erBtn"></button>
+                            </div>
+                        </section>
+                        <div class="collapse" id="evacRouteLegend">
+                            <div id="legendEvacRouteDiv"></div>
+                        </div>
+
+                        <br>
+                        <section class="funcClassContainer">
+                            <div class="checkboxFuncClass" id="funcClass">
+                                <div class="funMiddle" id="funClick">
+                                    <i class="fa fa-toggle-on fa-2x activeFun" id="onFun" style="display:none;"></i>
+                                    <i class="fa fa-toggle-on fa-2x fa-rotate-180 inactiveFun" id="offFun" ></i>
+                                </div>
+                                <span id="funLabel">Functional Classification </span>
+                            </div>
+                            <div class="funcClassLengendBtn">
+                                <button class="glyphicon glyphicon-menu-down" type="button" data-toggle="collapse" data-target="#funcClassLegend" aria-expanded="false" aria-controls="funcClassLegend" title="Legend" id="fcBtn"></button>
+                            </div>
+                        </section>
+                        <div class="collapse" id="funcClassLegend">
+                            <div id="legendFuncClassDiv"></div>
+                        </div>
+
+                        <br>
+                        <section class="lowWaterContainer">
+                            <div class="checkboxLowWater" id="lowWater">
+                                <div class="middle">
+                                    <i class="fa fa-toggle-on fa-2x active" id="onLow" style="display:none;"></i>
+                                    <i class="fa fa-toggle-on fa-2x fa-rotate-180 inactive" id="offLow" ></i>
+                                </div>
+                                <span id="lowLabel">Control Sections</span>
+                            </div>
+                            <div class="lowWaterLengendBtn">
+                                <button class="glyphicon glyphicon-menu-down" id="lwBtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" title="Legend"></button>
+                            </div>
+                        </section>
+                        <div class="collapse" id="collapseExample">
+                            <div id="legendLowWaterDiv"></div>
+                        </div>
+                    </div>
+                </div>
+                <li title="Select a Basemap">
+                    <a role="menuitem" tabindex="0" href='#' data-target="#basemapDiv" data-toggle="collapse" aria-expanded="false" aria-controls="basemapDiv">
+                        <span class="esri-icon esri-icon-basemap"></span>
+                        <span class="nav-label">Basemaps</span>
+                        <span id="basemapDown" class="glyphicon glyphicon-menu-down"></span>
+                    </a>
+                </li>
+                <div class="collapse" id="basemapDiv">
+                    <div id="txdotDiv" class="sub-label">TxDOT Basemap</div>
+                    <div id="esriLightGray" class="sub-label">Esri Light Gray</div>
+                    <div id="googleDiv" class="sub-label">Texas Imagery Service</div>
+                    <div id="streetsDiv" class="sub-label">Esri Streets</div>
+                    <div id="osm" class="sub-label">Open Street Map</div>
+                </div>
+                <li title="Print Options">
+                    <a role="menuitem" tabindex="0" href='#' data-target="#printChoice" data-toggle="collapse" aria-expanded="false" aria-controls="printChoice">
+                        <span class="esri-icon esri-icon-printer"></span>
+                        <span class="nav-label">Print</span>
+                        <span id="printDown" class="glyphicon glyphicon-menu-down"></span>
+                    </a>
+                </li>
+                <div class="collapse" id="printChoice">
+                    <div id="printSingleDiv" class="nav-label">
+                        <a role="menuitem" tabindex="0" href='#' id="print" aria-haspopup="true">
+                            <span title="Coming Soon" class="print-label">Print Map</span>
+                        </a>
+                    </div>
+                    <div id="printCountyDiv" class="nav-label">
+                        <a role="menuitem" tabindex="0" href='#' data-target="#counties" data-toggle="collapse" id="printMulti" aria-haspopup="true">
+                            <span title="Coming Soon"class="print-label">Print Map Series</span>
+                        </a>
+                    </div>
+                </div>
+                <li title="Jump To">
+                    <a role="menuitem" tabindex="0" href='#' data-target="#jumpToChoice" data-toggle="collapse" aria-expanded="false" aria-controls="printChoice">
+                        <span class="esri-icon esri-icon-reply"></span>
+                        <span class="nav-label">Jump To</span>
+                        <span id="jumpDown" class="glyphicon glyphicon-menu-down"></span>
+                    </a>
+                </li>
+                <div class="collapse" id="jumpToChoice">
+                    <div id="jumpToGoogleDiv" class="nav-label">
+                        <a role="menuitem" tabindex="0" href='#' id="google" value="googleMap" aria-haspopup="true">
+                            <span title="Jump to Google Map" class="jump-label">Jump To Google Maps</span>
+                        </a>
+                    </div>
+                    <div id="jumpToBingDiv" class="nav-label">
+                        <a role="menuitem" tabindex="0" href='#' data-target="" data-toggle="collapse" id="bing" value="bingMap" aria-haspopup="true">
+                            <span title="Jump to Bing Map"class="jump-label">Jump to Bing Maps</span>
+                        </a>
+                    </div>
+                </div>
+                <li>
+                    <a id="about">
+                        <span class="esri-icon esri-icon-question"></span>
+                        <span class="nav-label">About</span>
+                    </a>
+                </li>
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p><h2>
+                            <strong>
+                                Statewide Planning Map Version 5.0
+                            </strong>
+                        </h2></p>
+                        <p><strong style="color:red;">
+                            This is a prototype version of the Original Statewide Planning Map
+                        </strong></p>
+                        <p>Although we try to update information as often as possible, we assume no responsibility for any damages or inaccuracies if you rely on it.</p>
+        				<p>We offer no warranty that this application is accurate or complete. The information shown is for informational purposes and may not have been prepared for or be suitable for legal, engineering, or surveying purposes.</p>
+        				<p>It does not represent an on-the-ground survey and represents only the approximate relative location of property/administrative boundaries.</p>
+                        <p>For questions, please contact TxDOT - Transportation, Planning, and Programming's Data Management Section at
+                            <a href="mailto:TPP-GIS@txdot.gov?Subject=RIU%20Access%20Code%20Request" target="_top" style="color:blue;">TPP-GIS@txdot.gov</a>
+                        </p>
+
+                    </div>
+                </div>
+                <li title="External Links">
+                    <a href="#" data-target="#links" data-toggle="collapse" aria-expanded="false" aria-controls="links">
+                        <span class="esri-icon esri-icon-link"></span>
+                        <span class="nav-label">TxDOT Links</span>
+                        <span id="linksDown" class="glyphicon glyphicon-menu-down"></span>
+                    </a>
+                </li>
+                <div class="collapse" id="links">
+                    <div id="projectTrackerDiv" class="nav-label" onclick="window.open('https://apps.dot.state.tx.us/apps-cq/project_tracker/');">
+                        <span class="links-label" id="trackerLabel">Project Tracker</span>
+                    </div>
+                    <div id="odpDiv" class="nav-label" onclick="window.open('https://gis-txdot.opendata.arcgis.com/');">
+                        <span class="links-label">Open Data Portal</span>
+                    </div>
+                    <div id="agoDiv" class="nav-label" onclick="window.open('https://txdot.maps.arcgis.com/home/index.html');">
+                        <span class="links-label">ArcGIS Online</span>
+                    </div>
+                    <div id="spmDiv" class="nav-label" onclick="window.open('https://www.txdot.gov/apps/statewide_mapping/StatewidePlanningMap.html');">
+                        <span class="links-label">Original Statewide Planning Map</span>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+        <div id="mapViewDiv"></div>
+
+
+        <!-- jQuery CDN - Slim version (=without AJAX) -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous">
+        </script>
+        <!-- Popper.JS CDN-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous">
+        </script>
+        <!-- Bootstrap JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous">
+        </script>
+        <!-- Enable WebGL Rendering-->
+        <script>
+            var dojoConfig = {
+                has: {"esri-featurelayer-webgl": 1}
+            };
+        </script>
+        <!-- ArcGIS JS 4 -->
+        <script src="https://js.arcgis.com/4.8/"></script>
+        <script src="js/map.js"></script>
+        <script src="js/scripts.js"></script>
+
+
+
+
+    </body>
+
+</html>
