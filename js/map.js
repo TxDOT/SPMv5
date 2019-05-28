@@ -418,7 +418,8 @@ require([
 
         // Add Google Imagery WMTS layer
         google = new WMTSLayer({
-            url: "https://txgi.tnris.org/login/path/pegasus-horizon-castro-comrade/wmts",
+            // url: "https://txgi.tnris.org/login/path/pegasus-horizon-castro-comrade/wmts",
+            url: "https://txgi.tnris.org/login/path/corner-express-popcorn-compact/wmts",
             serviceMode: "KVP",
             id: "googles"
         });
