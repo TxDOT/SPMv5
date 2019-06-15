@@ -192,7 +192,7 @@ require([
     });
     searchWidget.sources.push({
         featureLayer: new FeatureLayer({
-            url: "https://services.arcgis.com/KTcxiTD9dsQw4r7Z/arcgis/rest/services/TxDOT_Projects/FeatureServer/0",
+            url: "https://services.arcgis.com/KTcxiTD9dsQw4r7Z/arcgis/rest/services/TxDOT_Projects_5_0/FeatureServer/0",
         }),
         searchFields: ["CONTROL_SECT_JOB"],
         displayField: "CONTROL_SECT_JOB",
